@@ -21,7 +21,10 @@ namespace Proyecto3.Controllers
         public ActionResult Index()
         {
             var tareas = (from tar in prueba.PRUEBAS_TA_04_CAT_TAREAS select tar).ToList();
+            TempData["Accion"] = "Visito la pagina principal";
+            TempData["Datos"] = "ninguna dato modificado";
             return View(tareas);
+
         }
 
         public ActionResult create() {
@@ -97,6 +100,9 @@ namespace Proyecto3.Controllers
                 edit_tarea.F_START = date_start;
                 edit_tarea.F_END = date_end;
                 prueba.SubmitChanges();
+                var identificador = id.ToString();
+                TempData["Accion"] = "Modificado la tarea:"+identificador;
+                TempData["Datos"] = "nueva fecha inicio: "+date_start+", nueva fecha fin: "+date_end;
                 return 1;
             }
             catch
@@ -194,8 +200,11 @@ namespace Proyecto3.Controllers
                 
                 prueba.PRUEBAS_TA_04_CAT_TAREAS.InsertOnSubmit(tarea);
                 prueba.SubmitChanges();
-                var id = GetId(tarea);
-                return id;
+                var nueva_tarea = GetId(tarea);
+                var identificador = TempData["nueva_tarea_id"];
+                TempData["Accion"] = "Creada la tarea:" + identificador;
+                TempData["Datos"] = "con fecha inicio: " + date_start + ", fecha fecha fin: " + date_end;
+                return nueva_tarea;
             }
             catch
             {
@@ -213,7 +222,7 @@ namespace Proyecto3.Controllers
                                  t.F_START == newtarea.F_START && t.F_END == newtarea.F_END && t.E_PRIORIDAD == newtarea.E_PRIORIDAD && 
                                  t.PRUEBAS_TA_01_E_ID_USUARIOS == newtarea.PRUEBAS_TA_01_E_ID_USUARIOS
                              select t).SingleOrDefault();
-
+                TempData["nueva_tarea_id"] = tarea.E_ID;
                 var jsontareas = new {
                                id = tarea.E_ID,
                                title = tarea.T_NOMBRE,
