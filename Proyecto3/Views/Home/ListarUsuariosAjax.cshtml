@@ -1,0 +1,35 @@
+﻿@model Proyecto3.Models.PRUEBAS_TA_01_CAT_USUARIOS
+
+@{
+    ViewBag.Title = "ListarUsuariosAjax";
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: "@Url.Content("~/Home/ListarUsuariosAjax2")",
+            //data: formulario,
+            success: function (data) {
+                $.each(data, function (key, value) {
+                    alert("ID: " + key + "-" + "Name: " + value.T_NOMBRE);
+                });
+            }
+        });
+    });
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<h2>ListarUsuariosAjax</h2>

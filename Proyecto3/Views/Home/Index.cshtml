@@ -1,0 +1,118 @@
+﻿@model IEnumerable<Proyecto3.Models.PRUEBAS_TA_01_CAT_USUARIOS>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+  <li><a href="#nothing" data-toggle="tab">Nothing</a></li>
+  <li><a href="#calendar" data-toggle="tab">Calendar</a></li>
+ </ul>
+<div class="tab-content">
+    <div class="tab-pane fade in active" id="home">
+        <h2>Index</h2>
+<div id="links">
+    <h2 id="reload_table">Reload</h2>
+    <p>
+        
+        @*@Html.ActionLink("Create New user", "Create")*@
+     @*   @{ Html.RenderPartial("Create_form", new Proyecto3.Models.PRUEBAS_TA_01_CAT_USUARIOS()); }*@
+        @{ Html.RenderPartial("CreateAjaxPartial", new Proyecto3.Models.PRUEBAS_TA_01_CAT_USUARIOS()); }
+      @*  @Html.ActionLink("Create New user with Ajax", "CrearUsuarioAjax")*@
+        @Html.ActionLink("Delete All", "DeleteAll")
+    </p>
+</div>
+
+<table class="tabla1">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.T_NOMBRE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.T_APELLIDOS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.T_EMAIL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.T_USUARIO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.E_EDAD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.T_DIRECCION)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.T_COLONIA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.REL_TA02_E_ID_CORPORACION)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.T_NOMBRE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.T_APELLIDOS)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.T_EMAIL)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.T_USUARIO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.E_EDAD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.T_DIRECCION)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.T_COLONIA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.REL_TA02_E_ID_CORPORACION)
+                </td>
+                <td>
+
+                    <div class="dropdown">
+                        <a data-toggle="dropdown" href="#">Options</a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                           <li> @Html.ActionLink("Edit", "Edit", new { id = item.E_ID }) </li>
+                           <li> @Html.ActionLink("Edit with Ajax", "EditarUsuarioAjax", new { id = item.E_ID }) </li>
+                           <li> @Html.ActionLink("Details", "Details", new { id = item.E_ID }) </li>
+                           <li> @Html.ActionLink("Delete", "Delete", new { id = item.E_ID }) </li>
+                        </ul>
+                    </div>
+
+                    
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+    </div>
+    <div class="tab-pane fade" id="nothing">
+        <h2>Nothing... yet</h2>
+        </div>
+
+     <div class="tab-pane fade" id="calendar">
+        @{ Html.RenderAction("Calendar", "Home"); }
+       
+        </div>
+</div>
+
+

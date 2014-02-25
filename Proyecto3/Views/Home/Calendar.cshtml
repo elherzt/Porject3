@@ -1,0 +1,229 @@
+﻿@model Proyecto3.Models.PRUEBAS_TA_04_CAT_TAREAS
+
+<script>
+    $(document).ready(function () {
+
+        //Ajax crear tarea 
+        $("#formulario_tareas").submit(function () {
+            return false;
+        });
+
+        $("#formulario_tareas").validate({
+            submitHandler: function (form) {
+
+                var formulario = $('#formulario_tareas').serialize();
+                console.log(formulario);
+                debugger
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Content("~/Tareas/CrearTareaAjax")",
+                    data: formulario,
+                    success: function (data) {
+                        console.log(data);
+                        if (data != 0) {
+                            alert("Tarea Creada");
+                            $('#showcalendar').fullCalendar('renderEvent', data, true);
+                        }
+                        else {
+                            alert("Tarea NO creada");
+                        }
+
+                    },error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        console.log(":(")
+                    }
+                });
+            }
+        });
+
+        //metod para actualizar tareas
+        function UpdateEvent(EventID, EventStart, EventEnd) {
+            var dataRow = {
+                'id': EventID,
+                'start': EventStart,
+                'end': EventEnd
+            }
+            $.ajax({
+
+                type: 'POST',
+                url: "@Url.Content("~/Tareas/EditarTareaAjax")",
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+
+                data: JSON.stringify(dataRow),
+                async: false,
+                cache: false,
+                success: function (data) {
+
+                    if (data == 1) {
+                        alert("Tarea Editada");
+                    } else {
+                        alert("Tarea no editada")
+
+                    }
+
+                },
+
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                    console.log("Tarea no pudo ser editada");
+                    console.log(textStatus);
+                }
+            });
+        }
+        ////////////
+
+        function color(prioridad) {
+            if (prioridad == 1) {
+                return "red";
+            } else {
+                if (prioridad == 2) {
+                    return "blue";
+                } else {
+                    return "green";
+                }
+            }
+        }
+
+        function formatDate(string) {
+            var inicio = (new Date(string)).toISOString().slice(0, 10);
+            //var string2 = string.toString();
+            //var cad = string2.split("G");
+            return inicio;
+        }
+
+        //
+
+
+        $.ajax({
+            type: "GET",
+            url: "@Url.Content("~/Home/GetEvents")",
+            //data: formulario,
+            dataType: 'json',
+            success: function (data) {
+                console.log(data)
+                var calendar = $("#showcalendar").fullCalendar({
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,agendaWeek,agendaDay'
+                    },
+                    defaultView: 'month',
+                    editable: true,
+                    allDaySlot: true,
+                    selectable: true,
+                    select: function (start, end, allDay) {
+                        $('#modal_form2').modal({
+                            show: true
+                        });
+                        $('#F_START').val(formatDate(start));
+                        $('#F_END').val(formatDate(end));
+                        $('#inicio').html(formatDate(start));
+                        $('#fin').html(formatDate(end));
+                    },
+                    slotMinutes: 15,
+                    eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
+                        alert(
+                            "La fecha de termino de " + event.title + " ha sido movida \n" +
+                            dayDelta + " dias y " +
+                            minuteDelta + " minutos."
+                        );
+
+                        if (confirm("is this okay?")) {
+                            UpdateEvent(event.id, event.start, event.end)
+                        } else {
+                            revertFunc();
+                        }
+
+                    },
+                    eventDrop: function (event, dayDelta, minuteDelta, revertFunc) {
+                        alert(
+                            "La fecha de termino de " + event.title + " ha sido movida \n" +
+                            dayDelta + " dias y " +
+                            minuteDelta + " minutos."
+                        );
+
+                        if (confirm("is this okay?")) {
+                            //llama metodo actualizar
+                            UpdateEvent(event.id, event.start, event.end)
+                            //termina ajax
+                        } else {
+                            revertFunc();
+                        }
+
+                    },
+
+                    events: data
+                });
+            }
+        });
+    });
+</script>
+
+
+<div id="showcalendar">
+</div>
+
+
+
+<div class="modal fade" id="modal_form2" tabindex="-1" role="dialog" aria-labelledby="modal_form2Label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modal_form2Label">Kiotech </h4>
+            </div>
+            <div class="modal-body">
+                <h1>Agregar Tarea </h1>
+                @using (Html.BeginForm("CrearTareaAjax", "Tareas", FormMethod.Post, new { id = "formulario_tareas" }))
+                {
+                    @Html.HiddenFor(model => model.F_START)
+                    @Html.HiddenFor(model => model.F_END)
+                    <h2>From <span id="inicio"></span> to <span id="fin"></span></h2>
+                    @Html.ValidationSummary(true)
+                    <label>Nombre</label>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.T_NOMBRE)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.T_NOMBRE)
+                        @Html.ValidationMessageFor(model => model.T_NOMBRE)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.T_DESCRIPCION)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.T_DESCRIPCION)
+                        @Html.ValidationMessageFor(model => model.T_DESCRIPCION)
+                    </div>
+                    
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.E_PRIORIDAD)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.E_PRIORIDAD)
+                        @Html.ValidationMessageFor(model => model.E_PRIORIDAD)
+                    </div>
+                    
+                    <label>Asignar tarea a un usuario: </label>
+                    <div class="editor-field">
+                        @Html.DropDownList("PRUEBAS_TA_01_E_ID_USUARIOS", String.Empty)
+                        @Html.ValidationMessageFor(model => model.PRUEBAS_TA_01_E_ID_USUARIOS)
+                    </div>
+                    <p>
+                        <input type="submit" value="Create" />
+                    </p>
+                }
+                @section Scripts {
+                    @Scripts.Render("~/bundles/jqueryval")
+                }   
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

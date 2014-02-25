@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Proyecto3.Models.PRUEBAS_TA_04_CAT_TAREAS>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Delete All", "DeleteAll")
+</p>
+<table class="tabla1">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.T_NOMBRE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.T_DESCRIPCION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.E_PRIORIDAD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.F_START)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.F_END)
+        </th>
+        <th></th>
+    </tr>
+</thead>
+    <tbody>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.T_NOMBRE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.T_DESCRIPCION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.E_PRIORIDAD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.F_START)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.F_END)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.E_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.E_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.E_ID })
+        </td>
+    </tr>
+}
+        </tbody>
+</table>

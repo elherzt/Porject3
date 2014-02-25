@@ -1,0 +1,141 @@
+﻿@model Proyecto3.Models.PRUEBAS_TA_01_CAT_USUARIOS
+
+@{
+    ViewBag.Title = "CrearUsuarioAjax";
+}
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#formulario").submit(function(){
+            return false;
+        });
+
+        $("#formulario").validate({
+            rules: {
+                T_NOMBRE: { required: true, minlength: 2 },
+                T_APELLIDOS: { required: true, minlength: 2 },
+                T_EMAIL: { required: true, minlength: 6, email: true}
+            },
+            messages: {
+                T_NOMBRE: {required:"Debe introducir su nombre.",minlength:"Longitud minima es de dos"},
+                T_APELLIDOS: "Debe introducir su apellido.",
+                T_EMAIL: "Email Invalido."
+            },
+            submitHandler: function (form) {
+               
+                var formulario = $('#formulario').serialize();
+                console.log(formulario);
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Content("~/Home/CrearUsuarioAjax")",
+                    data: formulario,
+                    success: function (data) {
+                        if (data == 1)
+                        {
+                            alert("El usuario ha sido agregado");
+                        } else {
+                            alert("No se pudo agregar el usuario");
+                        }
+                    }
+                });
+            }
+            });
+
+    });
+
+
+</script>
+
+
+<h2>CrearUsuarioAjax</h2>
+@using (Html.BeginForm("CrearUsuarioAjax", "Home", FormMethod.Post, new { id = "formulario" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>PRUEBAS_TA_01_CAT_USUARIOS</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_NOMBRE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.T_NOMBRE)
+            @Html.ValidationMessageFor(model => model.T_NOMBRE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_APELLIDOS)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.T_APELLIDOS)
+            @Html.ValidationMessageFor(model => model.T_APELLIDOS)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_EMAIL)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.T_EMAIL)
+            @Html.ValidationMessageFor(model => model.T_EMAIL)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_USUARIO)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.T_USUARIO)
+            @Html.ValidationMessageFor(model => model.T_USUARIO)
+        </div>
+
+         <div class="editor-field">
+            @Html.EditorFor(model => model.T_PASSWORD)
+            @Html.ValidationMessageFor(model => model.T_PASSWORD)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.E_EDAD)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.E_EDAD)
+            @Html.ValidationMessageFor(model => model.E_EDAD)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_DIRECCION)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.T_DIRECCION)
+            @Html.ValidationMessageFor(model => model.T_DIRECCION)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_COLONIA)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.T_COLONIA)
+            @Html.ValidationMessageFor(model => model.T_COLONIA)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.REL_TA02_E_ID_CORPORACION)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.REL_TA02_E_ID_CORPORACION)
+            @Html.ValidationMessageFor(model => model.REL_TA02_E_ID_CORPORACION)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

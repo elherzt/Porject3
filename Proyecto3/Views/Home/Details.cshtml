@@ -1,0 +1,71 @@
+﻿@model Proyecto3.Models.PRUEBAS_TA_01_CAT_USUARIOS
+
+@{
+    ViewBag.Title = "Show";
+}
+
+<h2>Show</h2>
+
+<fieldset>
+    <legend>PRUEBAS_TA_01_CAT_USUARIOS</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.T_NOMBRE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.T_NOMBRE)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.T_APELLIDOS)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.T_APELLIDOS)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.T_EMAIL)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.T_EMAIL)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.T_USUARIO)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.T_USUARIO)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.E_EDAD)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.E_EDAD)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.T_DIRECCION)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.T_DIRECCION)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.T_COLONIA)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.T_COLONIA)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.REL_TA02_E_ID_CORPORACION)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.REL_TA02_E_ID_CORPORACION)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.E_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

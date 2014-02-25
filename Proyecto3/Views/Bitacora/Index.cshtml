@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Proyecto3.Models.PRUEBAS_TA_05_BITACORA>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="tabla1">
+    <thead>
+        <tr>
+            <th>
+                Nombre del Controlador
+            </th>
+            <th>
+               Metodo
+            </th>
+            <th>
+               Id del Usuario
+            </th>
+            <th>
+                Mensaje
+            </th>
+            <th>
+                Fecha
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.T_CONTROLLER)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.T_METHOD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.E_USER_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.T_MESSAGE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.F_DATE)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

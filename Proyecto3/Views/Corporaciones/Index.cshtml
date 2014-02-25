@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Proyecto3.Models.PRUEBAS_TA_02_CAT_CORPORACION>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.T_CORPORACION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.T_DIRECCION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.T_DESCRIPCION)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.T_CORPORACION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.T_DIRECCION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.T_DESCRIPCION)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.E_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.E_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.E_ID })
+        </td>
+    </tr>
+}
+
+</table>

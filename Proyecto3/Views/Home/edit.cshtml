@@ -1,0 +1,93 @@
+﻿@model Proyecto3.Models.PRUEBAS_TA_01_CAT_USUARIOS
+
+@{
+    ViewBag.Title = "edit";
+}
+
+<h2>edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>PRUEBAS_TA_01_CAT_USUARIOS</legend>
+
+        @Html.HiddenFor(model => model.E_ID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_NOMBRE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.T_NOMBRE)
+            @Html.ValidationMessageFor(model => model.T_NOMBRE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_APELLIDOS)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.T_APELLIDOS)
+            @Html.ValidationMessageFor(model => model.T_APELLIDOS)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_EMAIL)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.T_EMAIL)
+            @Html.ValidationMessageFor(model => model.T_EMAIL)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_USUARIO)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.T_USUARIO)
+            @Html.ValidationMessageFor(model => model.T_USUARIO)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.E_EDAD)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.E_EDAD)
+            @Html.ValidationMessageFor(model => model.E_EDAD)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_DIRECCION)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.T_DIRECCION)
+            @Html.ValidationMessageFor(model => model.T_DIRECCION)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_COLONIA)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.T_COLONIA)
+            @Html.ValidationMessageFor(model => model.T_COLONIA)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.REL_TA02_E_ID_CORPORACION)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.REL_TA02_E_ID_CORPORACION)
+            @Html.ValidationMessageFor(model => model.REL_TA02_E_ID_CORPORACION)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

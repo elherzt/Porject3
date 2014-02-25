@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Pruebas" Class="pruebaDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=KIOTECHSERVER\PRUEBAS;Initial Catalog=Pruebas;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="PruebasConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.PRUEBAS_TA_01_CAT_USUARIOS" Member="PRUEBAS_TA_01_CAT_USUARIOS">
+    <Type Name="PRUEBAS_TA_01_CAT_USUARIOS">
+      <Column Name="E_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="T_NOMBRE" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="T_APELLIDOS" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="T_EMAIL" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="T_USUARIO" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="E_EDAD" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="T_DIRECCION" Type="System.String" DbType="VarChar(70) NOT NULL" CanBeNull="false" />
+      <Column Name="T_COLONIA" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="REL_TA02_E_ID_CORPORACION" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="T_PASSWORD" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="T_Nivel_Usuaro" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="T_Tipo_Usuario" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PRUEBAS_TA_02_CAT_CORPORACION" Member="PRUEBAS_TA_02_CAT_CORPORACION">
+    <Type Name="PRUEBAS_TA_02_CAT_CORPORACION">
+      <Column Name="E_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="T_CORPORACION" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="T_DIRECCION" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="T_DESCRIPCION" Type="System.String" DbType="VarChar(70)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PRUEBAS_TA_03_DISPONIBILIDAD_TRABAJADOR" Member="PRUEBAS_TA_03_DISPONIBILIDAD_TRABAJADOR">
+    <Type Name="PRUEBAS_TA_03_DISPONIBILIDAD_TRABAJADOR">
+      <Column Name="E_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FH_FECHAHORA_INICIAL" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FH_FECHAHORA_FINAL" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FL_TIEMPO_PAUSAS" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="FL_CAPACIDAD" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PRUEBAS_REL_T01_E_TRABAJADORES" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PRUEBAS_REL_T04_E_TAREA" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PRUEBAS_TA_04_CAT_TAREAS" Member="PRUEBAS_TA_04_CAT_TAREAS">
+    <Type Name="PRUEBAS_TA_04_CAT_TAREAS">
+      <Column Name="E_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="T_NOMBRE" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="T_DESCRIPCION" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="E_PRIORIDAD" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="F_START" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="F_END" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PRUEBAS_TA_01_E_ID_USUARIOS" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PRUEBAS_TA_05_BITACORA" Member="PRUEBAS_TA_05_BITACORA">
+    <Type Name="PRUEBAS_TA_05_BITACORA">
+      <Column Name="E_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="T_CONTROLLER" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="T_METHOD" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="E_USER_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="T_MESSAGE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="F_DATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.View_Tarea_User" Member="View_Tarea_User">
+    <Type Name="View_Tarea_User">
+      <Column Name="T_NOMBRE" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Cantidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

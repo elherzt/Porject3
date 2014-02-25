@@ -1,0 +1,75 @@
+﻿@model Proyecto3.Models.PRUEBAS_TA_01_CAT_USUARIOS
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>PRUEBAS_TA_01_CAT_USUARIOS</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.T_NOMBRE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.T_NOMBRE)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.T_APELLIDOS)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.T_APELLIDOS)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.T_EMAIL)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.T_EMAIL)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.T_USUARIO)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.T_USUARIO)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.E_EDAD)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.E_EDAD)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.T_DIRECCION)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.T_DIRECCION)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.T_COLONIA)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.T_COLONIA)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.REL_TA02_E_ID_CORPORACION)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.REL_TA02_E_ID_CORPORACION)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+         @Html.HiddenFor(model => model.E_ID)
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

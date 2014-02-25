@@ -1,0 +1,172 @@
+﻿@model Proyecto3.Models.PRUEBAS_TA_01_CAT_USUARIOS
+
+@{
+    ViewBag.Title = "EditarUsuarioAjax";
+    
+}
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //metodo para obtener datos de la bd
+       
+            var valor_id = @ViewBag.Idato
+           
+                $.ajax({
+           
+            type: 'GET',
+            url: "@Url.Content("~/Home/searchuser")",
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data: {id: valor_id },
+            async: false,
+            cache: false,
+            success: function (dataList) {
+                $("#E_ID").val(dataList.E_ID);
+                $("#T_NOMBRE").val(dataList.T_NOMBRE);
+                $("#T_APELLIDOS").val(dataList.T_APELLIDOS);
+                $("#T_EMAIL").val(dataList.T_EMAIL);
+                $("#T_USUARIO").val(dataList.T_USUARIO);
+                $("#E_EDAD").val(dataList.E_EDAD);
+                $("#T_DIRECCION").val(dataList.T_DIRECCION);
+                $("#T_COLONIA").val(dataList.T_COLONIA);
+                $("#REL_TA02_E_ID_CORPORACION").val(dataList.REL_TA02_E_ID_CORPORACION);
+            },
+
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(":(")
+            }
+        });
+      
+
+        //final de metodo
+
+        $("#formulario").submit(function(){
+            return false;
+        });
+        $("#formulario").validate({
+          
+            rules: {
+                T_NOMBRE: { required: true, minlength: 2 },
+                T_APELLIDOS: { required: true, minlength: 2 }
+            },
+            messages: {
+                T_NOMBRE: {required:"Debe introducir su nombre.",minlength:"Longitud minima es de dos"},
+                T_APELLIDOS: { required: "Debe introducir su apellido." }
+            },
+            submitHandler: function (form) {
+              //  event.preventDefault();
+                var formulario = $('#formulario').serialize();
+                console.log(formulario);
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Content("~/Home/EditarUsuarioAjax")",
+                    data: formulario,
+                    success: function (data) {
+                        if (data == 1)
+                        {
+                            console.log(formulario);
+                            alert("El usuario ha sido editasdo");
+                        } else {
+                            alert("No se pudo editar el usuario");
+                        }
+                    }
+                });
+            }
+            });
+
+    });
+
+
+</script>
+
+<h2>EditarUsuarioAjax</h2>
+<h2 id="llenar">LLenar</h2>
+
+@using (Html.BeginForm("EditarUsuarioAjax", "Home", FormMethod.Post, new { id = "formulario" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>PRUEBAS_TA_01_CAT_USUARIOS</legend>
+
+        @Html.HiddenFor(model => model.E_ID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_NOMBRE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.T_NOMBRE)
+            @Html.ValidationMessageFor(model => model.T_NOMBRE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_APELLIDOS)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.T_APELLIDOS)
+            @Html.ValidationMessageFor(model => model.T_APELLIDOS)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_EMAIL)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.T_EMAIL)
+            @Html.ValidationMessageFor(model => model.T_EMAIL)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_USUARIO)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.T_USUARIO)
+            @Html.ValidationMessageFor(model => model.T_USUARIO)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.E_EDAD)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.E_EDAD)
+            @Html.ValidationMessageFor(model => model.E_EDAD)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_DIRECCION)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.T_DIRECCION)
+            @Html.ValidationMessageFor(model => model.T_DIRECCION)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_COLONIA)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.T_COLONIA)
+            @Html.ValidationMessageFor(model => model.T_COLONIA)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.REL_TA02_E_ID_CORPORACION)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.REL_TA02_E_ID_CORPORACION)
+            @Html.ValidationMessageFor(model => model.REL_TA02_E_ID_CORPORACION)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

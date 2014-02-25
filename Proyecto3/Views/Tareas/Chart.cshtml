@@ -1,0 +1,138 @@
+﻿@model Proyecto3.Models.PRUEBAS_TA_04_CAT_TAREAS
+
+@{
+    ViewBag.Title = "Chart";
+}
+
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        //Ajax to get users
+        $.ajax({
+
+            type: 'GET',
+            url: "@Url.Content("~/Tareas/GetUsersChart")",
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            async: false,
+            cache: false,
+            success: function (resp) {
+                console.log(resp);
+                //new Chart(ctx).Pie(data)
+               
+                    $('#container_chart').highcharts({
+                        chart: {
+                            plotBackgroundColor: null,
+                            plotBorderWidth: null,
+                            plotShadow: false
+                        },
+                        title: {
+                            text: 'Tareas por usuarios '
+                        },
+                        tooltip: {
+                            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                        },
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                dataLabels: {
+                                    enabled: false
+                                },
+                                showInLegend: true
+                            }
+                        },
+                        series: [{
+                            type: 'pie',
+                            name: 'Browser share',
+                            data: resp
+                        }]
+                    });
+               
+            },
+
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                console.log("error")
+            }
+        });
+        ///
+
+        //para filtrar por fechas
+        $("#consultar").click(function () {
+            inicio = $('#F_START').val();
+            fin = $('#F_END').val();
+            if (inicio != "" && fin != "") {
+                var dataRow = {
+                    'inicio': inicio,
+                    'fin': fin
+                }
+                //ajax filtrado por fecha 
+                console.log(dataRow);
+                $.ajax({
+                    type: 'POST',
+                    url: "@Url.Content("~/Tareas/FilterChart")",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: 'json',
+                    data: JSON.stringify(dataRow),
+                    async: false,
+                    cache: false,
+                    success: function (resp) {
+                        console.log(resp);
+                        //new Chart(ctx).Pie(data)
+                        $('#container_chart').highcharts({
+                            chart: {
+                                plotBackgroundColor: null,
+                                plotBorderWidth: null,
+                                plotShadow: false
+                            },
+                            title: {
+                                text: 'Tareas por usuarios '
+                            },
+                            tooltip: {
+                                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                            },
+                            plotOptions: {
+                                pie: {
+                                    allowPointSelect: true,
+                                    cursor: 'pointer',
+                                    dataLabels: {
+                                        enabled: false
+                                    },
+                                    showInLegend: true
+                                }
+                            },
+                            series: [{
+                                type: 'pie',
+                                name: 'Browser share',
+                                data: resp
+                            }]
+                        });
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        console.log("error");
+                    }
+                });
+                //
+            }
+        });
+        ///
+    });
+
+</script>
+
+<h2>Grafica de tareas por usuario</h2>
+<h3>Filtar por fecha: </h3>
+<p>
+    Del
+    <input type="text" id="F_START" />
+    al
+    <input type="text" id="F_END" />
+    <span class="btn btn-default" id="consultar">Consultar</span>
+</p>
+
+<div id="container_chart" style="width: 100%; height: 400px;"></div>
+

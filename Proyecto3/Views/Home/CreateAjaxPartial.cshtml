@@ -1,0 +1,196 @@
+﻿<button class="btn btn-default btn-xs btn-lg" data-toggle="modal" data-target="#modal_form"> Create User with Ajax</button>
+
+<div class="modal fade" id="modal_form" tabindex="-1" role="dialog" aria-labelledby="modal_formLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="modal_formLabel"> Creating new user... </h4>
+      </div>
+      <div class="modal-body">
+
+@model Proyecto3.Models.PRUEBAS_TA_01_CAT_USUARIOS
+
+@{
+    ViewBag.Title = "CrearUsuarioAjax";
+}
+               <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#formulario").submit(function(){
+            return false;
+        });
+
+        $("#formulario").validate({
+            rules: {
+                T_NOMBRE: { required: true, minlength: 2 },
+                T_APELLIDOS: { required: true, minlength: 2 },
+                T_EMAIL: { required: true, minlength: 6, email: true}
+            },
+            messages: {
+                T_NOMBRE: {required:"Debe introducir su nombre.",minlength:"Longitud minima es de dos"},
+                T_APELLIDOS: "Debe introducir su apellido.",
+                T_EMAIL: "Email Invalido."
+            },
+            submitHandler: function (form) {
+               var oTable = $('.tabla1').dataTable();
+                var formulario = $('#formulario').serialize();
+                console.log(formulario);
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Content("~/Home/CrearUsuarioAjax")",
+                    data: formulario,
+                    success: function (data) {
+
+                        //oTable.fnStandingRedraw();
+                        if (data.T_NOMBRE != null) {
+                            oTable.fnAddData([
+                                data.T_NOMBRE,
+                                data.T_APELLIDOS,
+                                data.T_EMAIL,
+                                data.T_USUARIO,
+                                data.E_EDAD,
+                                data.T_DIRECCION,
+                                data.T_COLONIA,
+                                data.REL_TA02_E_ID_CORPORACION,
+                                '<div class="dropdown">'+
+                        '<a data-toggle="dropdown" href="#">Options</a>'+
+                        '<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">'+
+                           '<li> <a href="#">Edit</a> </li>'+
+                           '<li> <a href="#">Delete</a> </li>' +
+                           '<li> <a href="#">Edit with Ajax</a> </li>' +
+                           '<li> <a href="#">Details</a> </li>' +
+                        '</ul>'+
+                        '</div>'
+                        ]);
+
+                        //if (typeof oTable == 'undefined') {
+                        //    oTable = $('.tabla1').dataTable({
+                        //        //"bProcessing": true,
+                        //        //"bServerSide": true,
+                        //        //"iDisplayLength": 150,
+                        //        //"bLengthChange": false,
+                        //        //"sAjaxSource": "/Home/"
+                        //    });
+                        }
+                        else {
+                            oTable.fnClearTable(0);
+                            oTable.fnDraw({ bRetrieve: true });
+                        }
+
+                        //oTable.fnReloadAjax(oTable.fnSettings());
+                        //oTable.fnDraw();
+                            alert("El usuario ha sido agregado");
+                        //} else{
+                        //    alert("El usuario ha sido agregado");
+                        //}
+                    }
+                });
+            }
+            });
+
+    });
+
+</script>
+
+
+<h2>CrearUsuarioAjax</h2>
+@using (Html.BeginForm("CrearUsuarioAjax", "Home", FormMethod.Post, new { id = "formulario" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>PRUEBAS_TA_01_CAT_USUARIOS</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_NOMBRE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.T_NOMBRE)
+            @Html.ValidationMessageFor(model => model.T_NOMBRE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_APELLIDOS)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.T_APELLIDOS)
+            @Html.ValidationMessageFor(model => model.T_APELLIDOS)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_EMAIL)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.T_EMAIL)
+            @Html.ValidationMessageFor(model => model.T_EMAIL)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_USUARIO)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.T_USUARIO)
+            @Html.ValidationMessageFor(model => model.T_USUARIO)
+        </div>
+
+         <div class="editor-label">
+            @Html.LabelFor(model => model.T_PASSWORD)
+        </div>
+         <div class="editor-field">
+            @Html.PasswordFor(model => model.T_PASSWORD, new { type = "password"})
+            @Html.ValidationMessageFor(model => model.T_PASSWORD)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.E_EDAD)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.E_EDAD)
+            @Html.ValidationMessageFor(model => model.E_EDAD)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_DIRECCION)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.T_DIRECCION)
+            @Html.ValidationMessageFor(model => model.T_DIRECCION)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_COLONIA)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.T_COLONIA)
+            @Html.ValidationMessageFor(model => model.T_COLONIA)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.REL_TA02_E_ID_CORPORACION)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.REL_TA02_E_ID_CORPORACION)
+            @Html.ValidationMessageFor(model => model.REL_TA02_E_ID_CORPORACION)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+ </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
