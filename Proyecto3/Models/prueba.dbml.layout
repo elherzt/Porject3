@@ -1,41 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 12.375, 8.5" name="prueba">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 9.125" name="prueba">
   <DataContextMoniker Name="/pruebaDataContext" />
   <nestedChildShapes>
-    <classShape Id="03ac8392-8524-45c5-8200-c905637ac1b2" absoluteBounds="7.25, 0.5, 4.875, 3.1170068359375">
+    <classShape Id="6cee9b72-4108-46a0-84de-4e4d2145cf20" absoluteBounds="0.75, 0.75, 2, 3.1170068359375005">
       <DataClassMoniker Name="/pruebaDataContext/PRUEBAS_TA_01_CAT_USUARIOS" />
       <nestedChildShapes>
-        <elementListCompartment Id="e6cea9f2-4f71-4545-96ed-30458e5cdbf5" absoluteBounds="7.265, 0.96, 4.8450000000000006, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="7c72c1ae-b084-446c-806f-688fcdccf95a" absoluteBounds="0.765, 1.21, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="7c5ecd13-08c7-46ad-9341-ea4ea374212d" absoluteBounds="4.875, 2.875, 2, 1.5785953776041666">
-      <DataClassMoniker Name="/pruebaDataContext/PRUEBAS_TA_02_CAT_CORPORACION" />
-      <nestedChildShapes>
-        <elementListCompartment Id="a30b6851-b438-4bce-bf30-9bfd93e6d672" absoluteBounds="4.89, 3.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="9d2e2fb8-581a-4abc-a365-6856fe15ac95" absoluteBounds="5, 0.5, 2, 2.1554996744791666">
-      <DataClassMoniker Name="/pruebaDataContext/PRUEBAS_TA_03_DISPONIBILIDAD_TRABAJADOR" />
-      <nestedChildShapes>
-        <elementListCompartment Id="31436dd3-94c8-469e-b7f9-9c7990786ce3" absoluteBounds="5.015, 0.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="0fe43ac2-05d6-48f0-b0dc-71df22457ec8" absoluteBounds="2.75, 0.5, 2, 2.1554996744791666">
-      <DataClassMoniker Name="/pruebaDataContext/PRUEBAS_TA_04_CAT_TAREAS" />
-      <nestedChildShapes>
-        <elementListCompartment Id="d4c33321-7bce-448d-9249-4061f8ac0580" absoluteBounds="2.7649999999999997, 0.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="403f5505-d2fa-4c91-9c0e-59e5ca01a88d" absoluteBounds="0.5, 0.5, 2, 1.9631982421875">
+    <classShape Id="292a82df-eabd-4c35-b647-9342f237c5dc" absoluteBounds="3.75, 0.75, 2, 1.9631982421875">
       <DataClassMoniker Name="/pruebaDataContext/PRUEBAS_TA_05_BITACORA" />
       <nestedChildShapes>
-        <elementListCompartment Id="f1af9c2b-6009-4d99-8715-e0a11b615a80" absoluteBounds="0.51499999999999968, 0.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="ebce1ed4-a472-4851-96dd-b2398dc1a503" absoluteBounds="3.765, 1.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="30e62a40-bbc3-4635-8da9-c69398a145e1" absoluteBounds="2.625, 2.875, 2, 1.1939925130208333">
+    <classShape Id="bec46924-5d60-4011-9f64-c58f8d8c2542" absoluteBounds="3.75, 3.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/pruebaDataContext/PRUEBAS_TA_02_CAT_CORPORACION" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9cf3107b-74ad-494a-8822-3c620fc44366" absoluteBounds="3.765, 4.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="64d23012-5e50-46d7-bdf6-153af040dc0d" absoluteBounds="6.75, 0.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/pruebaDataContext/PRUEBAS_TA_03_DISPONIBILIDAD_TRABAJADOR" />
+      <nestedChildShapes>
+        <elementListCompartment Id="898cc275-09e3-47d2-afda-36d5b0285384" absoluteBounds="6.765, 1.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="64147674-a5b6-43e5-bfa7-525df02f12d5" absoluteBounds="0.75, 6.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/pruebaDataContext/PRUEBAS_TA_04_CAT_TAREAS" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0cd3473f-1d63-4ec8-9e3f-64bcdc625bdb" absoluteBounds="0.765, 7.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0f36e790-03f4-446d-aaae-3733723ac9af" absoluteBounds="8.5, 4.75, 2, 1.1939925130208333">
       <DataClassMoniker Name="/pruebaDataContext/View_Tarea_User" />
       <nestedChildShapes>
-        <elementListCompartment Id="3a5ae118-6556-47ee-b64c-6a6109a3df3d" absoluteBounds="2.6399999999999997, 3.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="82194df2-9453-41e1-9e27-0961d6ea9572" absoluteBounds="8.515, 5.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

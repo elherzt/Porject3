@@ -33,6 +33,9 @@ namespace Proyecto3.Models
     partial void InsertPRUEBAS_TA_01_CAT_USUARIOS(PRUEBAS_TA_01_CAT_USUARIOS instance);
     partial void UpdatePRUEBAS_TA_01_CAT_USUARIOS(PRUEBAS_TA_01_CAT_USUARIOS instance);
     partial void DeletePRUEBAS_TA_01_CAT_USUARIOS(PRUEBAS_TA_01_CAT_USUARIOS instance);
+    partial void InsertPRUEBAS_TA_05_BITACORA(PRUEBAS_TA_05_BITACORA instance);
+    partial void UpdatePRUEBAS_TA_05_BITACORA(PRUEBAS_TA_05_BITACORA instance);
+    partial void DeletePRUEBAS_TA_05_BITACORA(PRUEBAS_TA_05_BITACORA instance);
     partial void InsertPRUEBAS_TA_02_CAT_CORPORACION(PRUEBAS_TA_02_CAT_CORPORACION instance);
     partial void UpdatePRUEBAS_TA_02_CAT_CORPORACION(PRUEBAS_TA_02_CAT_CORPORACION instance);
     partial void DeletePRUEBAS_TA_02_CAT_CORPORACION(PRUEBAS_TA_02_CAT_CORPORACION instance);
@@ -42,9 +45,6 @@ namespace Proyecto3.Models
     partial void InsertPRUEBAS_TA_04_CAT_TAREAS(PRUEBAS_TA_04_CAT_TAREAS instance);
     partial void UpdatePRUEBAS_TA_04_CAT_TAREAS(PRUEBAS_TA_04_CAT_TAREAS instance);
     partial void DeletePRUEBAS_TA_04_CAT_TAREAS(PRUEBAS_TA_04_CAT_TAREAS instance);
-    partial void InsertPRUEBAS_TA_05_BITACORA(PRUEBAS_TA_05_BITACORA instance);
-    partial void UpdatePRUEBAS_TA_05_BITACORA(PRUEBAS_TA_05_BITACORA instance);
-    partial void DeletePRUEBAS_TA_05_BITACORA(PRUEBAS_TA_05_BITACORA instance);
     #endregion
 		
 		public pruebaDataContext() : 
@@ -85,6 +85,14 @@ namespace Proyecto3.Models
 			}
 		}
 		
+		public System.Data.Linq.Table<PRUEBAS_TA_05_BITACORA> PRUEBAS_TA_05_BITACORA
+		{
+			get
+			{
+				return this.GetTable<PRUEBAS_TA_05_BITACORA>();
+			}
+		}
+		
 		public System.Data.Linq.Table<PRUEBAS_TA_02_CAT_CORPORACION> PRUEBAS_TA_02_CAT_CORPORACION
 		{
 			get
@@ -106,14 +114,6 @@ namespace Proyecto3.Models
 			get
 			{
 				return this.GetTable<PRUEBAS_TA_04_CAT_TAREAS>();
-			}
-		}
-		
-		public System.Data.Linq.Table<PRUEBAS_TA_05_BITACORA> PRUEBAS_TA_05_BITACORA
-		{
-			get
-			{
-				return this.GetTable<PRUEBAS_TA_05_BITACORA>();
 			}
 		}
 		
@@ -140,7 +140,9 @@ namespace Proyecto3.Models
 		
 		private string _T_EMAIL;
 		
-		private string _T_USUARIO;
+		private System.Nullable<int> _T_Nivel_Usuaro;
+		
+		private string _T_Tipo_Usuario;
 		
 		private System.Nullable<int> _E_EDAD;
 		
@@ -148,13 +150,11 @@ namespace Proyecto3.Models
 		
 		private string _T_COLONIA;
 		
-		private int _REL_TA02_E_ID_CORPORACION;
+		private System.Nullable<int> _REL_TA02_E_ID_CORPORACION;
 		
 		private string _T_PASSWORD;
 		
-		private string _T_Nivel_Usuaro;
-		
-		private string _T_Tipo_Usuario;
+		private string _T_USUARIO;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -168,22 +168,22 @@ namespace Proyecto3.Models
     partial void OnT_APELLIDOSChanged();
     partial void OnT_EMAILChanging(string value);
     partial void OnT_EMAILChanged();
-    partial void OnT_USUARIOChanging(string value);
-    partial void OnT_USUARIOChanged();
+    partial void OnT_Nivel_UsuaroChanging(System.Nullable<int> value);
+    partial void OnT_Nivel_UsuaroChanged();
+    partial void OnT_Tipo_UsuarioChanging(string value);
+    partial void OnT_Tipo_UsuarioChanged();
     partial void OnE_EDADChanging(System.Nullable<int> value);
     partial void OnE_EDADChanged();
     partial void OnT_DIRECCIONChanging(string value);
     partial void OnT_DIRECCIONChanged();
     partial void OnT_COLONIAChanging(string value);
     partial void OnT_COLONIAChanged();
-    partial void OnREL_TA02_E_ID_CORPORACIONChanging(int value);
+    partial void OnREL_TA02_E_ID_CORPORACIONChanging(System.Nullable<int> value);
     partial void OnREL_TA02_E_ID_CORPORACIONChanged();
     partial void OnT_PASSWORDChanging(string value);
     partial void OnT_PASSWORDChanged();
-    partial void OnT_Nivel_UsuaroChanging(string value);
-    partial void OnT_Nivel_UsuaroChanged();
-    partial void OnT_Tipo_UsuarioChanging(string value);
-    partial void OnT_Tipo_UsuarioChanged();
+    partial void OnT_USUARIOChanging(string value);
+    partial void OnT_USUARIOChanged();
     #endregion
 		
 		public PRUEBAS_TA_01_CAT_USUARIOS()
@@ -211,7 +211,7 @@ namespace Proyecto3.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_NOMBRE", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_NOMBRE", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
 		public string T_NOMBRE
 		{
 			get
@@ -231,7 +231,7 @@ namespace Proyecto3.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_APELLIDOS", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_APELLIDOS", DbType="VarChar(86)")]
 		public string T_APELLIDOS
 		{
 			get
@@ -251,7 +251,7 @@ namespace Proyecto3.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_EMAIL", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_EMAIL", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
 		public string T_EMAIL
 		{
 			get
@@ -271,22 +271,42 @@ namespace Proyecto3.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_USUARIO", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string T_USUARIO
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_Nivel_Usuaro", DbType="Int")]
+		public System.Nullable<int> T_Nivel_Usuaro
 		{
 			get
 			{
-				return this._T_USUARIO;
+				return this._T_Nivel_Usuaro;
 			}
 			set
 			{
-				if ((this._T_USUARIO != value))
+				if ((this._T_Nivel_Usuaro != value))
 				{
-					this.OnT_USUARIOChanging(value);
+					this.OnT_Nivel_UsuaroChanging(value);
 					this.SendPropertyChanging();
-					this._T_USUARIO = value;
-					this.SendPropertyChanged("T_USUARIO");
-					this.OnT_USUARIOChanged();
+					this._T_Nivel_Usuaro = value;
+					this.SendPropertyChanged("T_Nivel_Usuaro");
+					this.OnT_Nivel_UsuaroChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_Tipo_Usuario", DbType="VarChar(20)")]
+		public string T_Tipo_Usuario
+		{
+			get
+			{
+				return this._T_Tipo_Usuario;
+			}
+			set
+			{
+				if ((this._T_Tipo_Usuario != value))
+				{
+					this.OnT_Tipo_UsuarioChanging(value);
+					this.SendPropertyChanging();
+					this._T_Tipo_Usuario = value;
+					this.SendPropertyChanged("T_Tipo_Usuario");
+					this.OnT_Tipo_UsuarioChanged();
 				}
 			}
 		}
@@ -311,7 +331,7 @@ namespace Proyecto3.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_DIRECCION", DbType="VarChar(70) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_DIRECCION", DbType="VarChar(80)")]
 		public string T_DIRECCION
 		{
 			get
@@ -331,7 +351,7 @@ namespace Proyecto3.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_COLONIA", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_COLONIA", DbType="VarChar(80)")]
 		public string T_COLONIA
 		{
 			get
@@ -351,8 +371,8 @@ namespace Proyecto3.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_REL_TA02_E_ID_CORPORACION", DbType="Int NOT NULL")]
-		public int REL_TA02_E_ID_CORPORACION
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_REL_TA02_E_ID_CORPORACION", DbType="Int")]
+		public System.Nullable<int> REL_TA02_E_ID_CORPORACION
 		{
 			get
 			{
@@ -371,7 +391,7 @@ namespace Proyecto3.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_PASSWORD", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_PASSWORD", DbType="VarChar(16) NOT NULL", CanBeNull=false)]
 		public string T_PASSWORD
 		{
 			get
@@ -391,42 +411,204 @@ namespace Proyecto3.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_Nivel_Usuaro", DbType="VarChar(10)")]
-		public string T_Nivel_Usuaro
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_USUARIO", DbType="VarChar(16) NOT NULL", CanBeNull=false)]
+		public string T_USUARIO
 		{
 			get
 			{
-				return this._T_Nivel_Usuaro;
+				return this._T_USUARIO;
 			}
 			set
 			{
-				if ((this._T_Nivel_Usuaro != value))
+				if ((this._T_USUARIO != value))
 				{
-					this.OnT_Nivel_UsuaroChanging(value);
+					this.OnT_USUARIOChanging(value);
 					this.SendPropertyChanging();
-					this._T_Nivel_Usuaro = value;
-					this.SendPropertyChanged("T_Nivel_Usuaro");
-					this.OnT_Nivel_UsuaroChanged();
+					this._T_USUARIO = value;
+					this.SendPropertyChanged("T_USUARIO");
+					this.OnT_USUARIOChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_Tipo_Usuario", DbType="VarChar(10)")]
-		public string T_Tipo_Usuario
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PRUEBAS_TA_05_BITACORA")]
+	public partial class PRUEBAS_TA_05_BITACORA : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _E_ID;
+		
+		private string _T_CONTROLLER;
+		
+		private string _T_METHOD;
+		
+		private System.Nullable<int> _E_USER_ID;
+		
+		private string _T_MESSAGE;
+		
+		private System.Nullable<System.DateTime> _F_DATE;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnE_IDChanging(int value);
+    partial void OnE_IDChanged();
+    partial void OnT_CONTROLLERChanging(string value);
+    partial void OnT_CONTROLLERChanged();
+    partial void OnT_METHODChanging(string value);
+    partial void OnT_METHODChanged();
+    partial void OnE_USER_IDChanging(System.Nullable<int> value);
+    partial void OnE_USER_IDChanged();
+    partial void OnT_MESSAGEChanging(string value);
+    partial void OnT_MESSAGEChanged();
+    partial void OnF_DATEChanging(System.Nullable<System.DateTime> value);
+    partial void OnF_DATEChanged();
+    #endregion
+		
+		public PRUEBAS_TA_05_BITACORA()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_E_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int E_ID
 		{
 			get
 			{
-				return this._T_Tipo_Usuario;
+				return this._E_ID;
 			}
 			set
 			{
-				if ((this._T_Tipo_Usuario != value))
+				if ((this._E_ID != value))
 				{
-					this.OnT_Tipo_UsuarioChanging(value);
+					this.OnE_IDChanging(value);
 					this.SendPropertyChanging();
-					this._T_Tipo_Usuario = value;
-					this.SendPropertyChanged("T_Tipo_Usuario");
-					this.OnT_Tipo_UsuarioChanged();
+					this._E_ID = value;
+					this.SendPropertyChanged("E_ID");
+					this.OnE_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_CONTROLLER", DbType="VarChar(50)")]
+		public string T_CONTROLLER
+		{
+			get
+			{
+				return this._T_CONTROLLER;
+			}
+			set
+			{
+				if ((this._T_CONTROLLER != value))
+				{
+					this.OnT_CONTROLLERChanging(value);
+					this.SendPropertyChanging();
+					this._T_CONTROLLER = value;
+					this.SendPropertyChanged("T_CONTROLLER");
+					this.OnT_CONTROLLERChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_METHOD", DbType="VarChar(50)")]
+		public string T_METHOD
+		{
+			get
+			{
+				return this._T_METHOD;
+			}
+			set
+			{
+				if ((this._T_METHOD != value))
+				{
+					this.OnT_METHODChanging(value);
+					this.SendPropertyChanging();
+					this._T_METHOD = value;
+					this.SendPropertyChanged("T_METHOD");
+					this.OnT_METHODChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_E_USER_ID", DbType="Int")]
+		public System.Nullable<int> E_USER_ID
+		{
+			get
+			{
+				return this._E_USER_ID;
+			}
+			set
+			{
+				if ((this._E_USER_ID != value))
+				{
+					this.OnE_USER_IDChanging(value);
+					this.SendPropertyChanging();
+					this._E_USER_ID = value;
+					this.SendPropertyChanged("E_USER_ID");
+					this.OnE_USER_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_MESSAGE", DbType="VarChar(200)")]
+		public string T_MESSAGE
+		{
+			get
+			{
+				return this._T_MESSAGE;
+			}
+			set
+			{
+				if ((this._T_MESSAGE != value))
+				{
+					this.OnT_MESSAGEChanging(value);
+					this.SendPropertyChanging();
+					this._T_MESSAGE = value;
+					this.SendPropertyChanged("T_MESSAGE");
+					this.OnT_MESSAGEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_DATE", DbType="DateTime")]
+		public System.Nullable<System.DateTime> F_DATE
+		{
+			get
+			{
+				return this._F_DATE;
+			}
+			set
+			{
+				if ((this._F_DATE != value))
+				{
+					this.OnF_DATEChanging(value);
+					this.SendPropertyChanging();
+					this._F_DATE = value;
+					this.SendPropertyChanged("F_DATE");
+					this.OnF_DATEChanged();
 				}
 			}
 		}
@@ -973,188 +1155,6 @@ namespace Proyecto3.Models
 					this._PRUEBAS_TA_01_E_ID_USUARIOS = value;
 					this.SendPropertyChanged("PRUEBAS_TA_01_E_ID_USUARIOS");
 					this.OnPRUEBAS_TA_01_E_ID_USUARIOSChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PRUEBAS_TA_05_BITACORA")]
-	public partial class PRUEBAS_TA_05_BITACORA : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _E_ID;
-		
-		private string _T_CONTROLLER;
-		
-		private string _T_METHOD;
-		
-		private System.Nullable<int> _E_USER_ID;
-		
-		private string _T_MESSAGE;
-		
-		private System.Nullable<System.DateTime> _F_DATE;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnE_IDChanging(int value);
-    partial void OnE_IDChanged();
-    partial void OnT_CONTROLLERChanging(string value);
-    partial void OnT_CONTROLLERChanged();
-    partial void OnT_METHODChanging(string value);
-    partial void OnT_METHODChanged();
-    partial void OnE_USER_IDChanging(System.Nullable<int> value);
-    partial void OnE_USER_IDChanged();
-    partial void OnT_MESSAGEChanging(string value);
-    partial void OnT_MESSAGEChanged();
-    partial void OnF_DATEChanging(System.Nullable<System.DateTime> value);
-    partial void OnF_DATEChanged();
-    #endregion
-		
-		public PRUEBAS_TA_05_BITACORA()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_E_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int E_ID
-		{
-			get
-			{
-				return this._E_ID;
-			}
-			set
-			{
-				if ((this._E_ID != value))
-				{
-					this.OnE_IDChanging(value);
-					this.SendPropertyChanging();
-					this._E_ID = value;
-					this.SendPropertyChanged("E_ID");
-					this.OnE_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_CONTROLLER", DbType="VarChar(50)")]
-		public string T_CONTROLLER
-		{
-			get
-			{
-				return this._T_CONTROLLER;
-			}
-			set
-			{
-				if ((this._T_CONTROLLER != value))
-				{
-					this.OnT_CONTROLLERChanging(value);
-					this.SendPropertyChanging();
-					this._T_CONTROLLER = value;
-					this.SendPropertyChanged("T_CONTROLLER");
-					this.OnT_CONTROLLERChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_METHOD", DbType="VarChar(50)")]
-		public string T_METHOD
-		{
-			get
-			{
-				return this._T_METHOD;
-			}
-			set
-			{
-				if ((this._T_METHOD != value))
-				{
-					this.OnT_METHODChanging(value);
-					this.SendPropertyChanging();
-					this._T_METHOD = value;
-					this.SendPropertyChanged("T_METHOD");
-					this.OnT_METHODChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_E_USER_ID", DbType="Int")]
-		public System.Nullable<int> E_USER_ID
-		{
-			get
-			{
-				return this._E_USER_ID;
-			}
-			set
-			{
-				if ((this._E_USER_ID != value))
-				{
-					this.OnE_USER_IDChanging(value);
-					this.SendPropertyChanging();
-					this._E_USER_ID = value;
-					this.SendPropertyChanged("E_USER_ID");
-					this.OnE_USER_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_MESSAGE", DbType="VarChar(50)")]
-		public string T_MESSAGE
-		{
-			get
-			{
-				return this._T_MESSAGE;
-			}
-			set
-			{
-				if ((this._T_MESSAGE != value))
-				{
-					this.OnT_MESSAGEChanging(value);
-					this.SendPropertyChanging();
-					this._T_MESSAGE = value;
-					this.SendPropertyChanged("T_MESSAGE");
-					this.OnT_MESSAGEChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_DATE", DbType="DateTime")]
-		public System.Nullable<System.DateTime> F_DATE
-		{
-			get
-			{
-				return this._F_DATE;
-			}
-			set
-			{
-				if ((this._F_DATE != value))
-				{
-					this.OnF_DATEChanging(value);
-					this.SendPropertyChanging();
-					this._F_DATE = value;
-					this.SendPropertyChanged("F_DATE");
-					this.OnF_DATEChanged();
 				}
 			}
 		}
