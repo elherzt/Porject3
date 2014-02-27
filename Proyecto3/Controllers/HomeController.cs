@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.Mvc;
 using System.Security.Cryptography;
 using System.Text;
@@ -203,8 +204,9 @@ namespace Proyecto3.Controllers
             if (user != null) {
                  var pass = getMd5Hash(password);
                 if (pass == user.T_PASSWORD){
+                    FormsAuthentication.SetAuthCookie(username, false);
                     Session["id"] = user.E_ID;
-                    Session["user_name"] = user.T_USUARIO;
+                    //Session["user_name"] = user.T_USUARIO;
                     Session["user"] = user.T_NOMBRE;
                 }
             }
@@ -216,6 +218,7 @@ namespace Proyecto3.Controllers
 
         public ActionResult Logout() {
             Session.Abandon();
+            FormsAuthentication.SignOut();
             return RedirectToAction("Index");
         }
         

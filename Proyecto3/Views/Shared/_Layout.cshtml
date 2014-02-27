@@ -1,60 +1,72 @@
 ﻿<!DOCTYPE html>
 <html lang="es">
-    <head>
+<head>
 
-        <title>@ViewBag.Title - Mi aplicación ASP.NET MVC</title>
-        
-        <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
-       
-        <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
-        <link href="@Url.Content("~/Content/bootstrap-theme.css")" rel="stylesheet" type="text/css" />
-        <link href="@Url.Content("~/Content/jquery.dataTables.css")" rel="stylesheet" type="text/css" />
-        <link href="@Url.Content("~/Content/fullcalendar.css")" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-         <link rel="stylesheet" href="/resources/demos/style.css">
+    <title>@ViewBag.Title - Mi aplicación ASP.NET MVC</title>
 
-        <script src="@Url.Content("~/Scripts/jquery-2.1.js")" type="text/javascript"></script>
-       <script src="@Url.Content("~/Scripts/bootstrap.min.js")" type="text/javascript"></script>
-         <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-        <script src="http://code.highcharts.com/highcharts.js"></script>
-        <script src="@Url.Content("~/Scripts/fullcalendar.js")" type="text/javascript"></script>
-        <script src="@Url.Content("~/Scripts/jquery.dataTables.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
 
-   
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/bootstrap-theme.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/jquery.dataTables.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/fullcalendar.css")" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
 
-       <script src="@Url.Content("~/Scripts/datatable_bootstrap.js")" type="text/javascript"></script>
-       
-        <script src="@Url.Content("~/Scripts/tablas.js")" type="text/javascript"></script>
-   
-        <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery-2.1.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")" type="text/javascript"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="@Url.Content("~/Scripts/fullcalendar.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.dataTables.js")" type="text/javascript"></script>
 
-        
-   
 
-        
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
-    </head>
-    <body>
-        <header>
 
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("su logotipo aquí", "Index", "Home")</p>
-                </div>
-                <div class="float-right">
-                    <nav>
+    <script src="@Url.Content("~/Scripts/datatable_bootstrap.js")" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Scripts/tablas.js")" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+
+
+
+
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <header>
+
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">@Html.ActionLink("su logotipo aquí", "Index", "Home")</p>
+            </div>
+            <div class="float-right">
+                <nav>
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        <strong>@Html.Encode(User.Identity.Name)</strong>
+                        @Html.ActionLink("Logout", "Logout", "Home")
+                    }
+                    else
+                    {
                         
-                        <h1>@Session["user"]</h1>
+                        <span>| </span>
+                        @Html.ActionLink("Sign In", "Login", "Home")
+                    }
+
+                    @*  <h1>@Session["user"]</h1>
                         @if (Session["id"] != null) { 
                             @Html.ActionLink("Logout", "Logout", "Home")
                         }else{
                             @Html.ActionLink("Login", "Login", "Home")
-                        }
-                         </nav>
-                </div>
+                        }*@
+                </nav>
+            </div>
 
-                @*<div class="float-right">
+            @*<div class="float-right">
                     <section id="login">
                         @Html.Partial("_LoginPartial")
                     </section>
@@ -66,22 +78,22 @@
                         </ul>
                     </nav>
                 </div>*@
-            </div>
-        </header>
-        <div id="body">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
-            </section>
         </div>
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET MVC</p>
-                </div>
+    </header>
+    <div id="body">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET MVC</p>
             </div>
-        </footer>
-         @RenderSection("scripts", required: false)
-      
-    </body>
+        </div>
+    </footer>
+    @RenderSection("scripts", required: false)
+
+</body>
 </html>

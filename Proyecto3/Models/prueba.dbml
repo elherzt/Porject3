@@ -3,17 +3,27 @@
   <Table Name="dbo.PRUEBAS_TA_01_CAT_USUARIOS" Member="PRUEBAS_TA_01_CAT_USUARIOS">
     <Type Name="PRUEBAS_TA_01_CAT_USUARIOS">
       <Column Name="E_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="T_NOMBRE" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="T_APELLIDOS" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="T_EMAIL" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="T_USUARIO" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="T_NOMBRE" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="T_APELLIDOS" Type="System.String" DbType="VarChar(86)" CanBeNull="true" />
+      <Column Name="T_EMAIL" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="T_Nivel_Usuaro" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="T_Tipo_Usuario" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="E_EDAD" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="T_DIRECCION" Type="System.String" DbType="VarChar(70) NOT NULL" CanBeNull="false" />
-      <Column Name="T_COLONIA" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="REL_TA02_E_ID_CORPORACION" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="T_PASSWORD" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="T_Nivel_Usuaro" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="T_Tipo_Usuario" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="T_DIRECCION" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
+      <Column Name="T_COLONIA" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
+      <Column Name="REL_TA02_E_ID_CORPORACION" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="T_PASSWORD" Type="System.String" DbType="VarChar(16) NOT NULL" CanBeNull="false" />
+      <Column Name="T_USUARIO" Type="System.String" DbType="VarChar(16) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PRUEBAS_TA_05_BITACORA" Member="PRUEBAS_TA_05_BITACORA">
+    <Type Name="PRUEBAS_TA_05_BITACORA">
+      <Column Name="E_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="T_CONTROLLER" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="T_METHOD" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="E_USER_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="T_MESSAGE" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="F_DATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.PRUEBAS_TA_02_CAT_CORPORACION" Member="PRUEBAS_TA_02_CAT_CORPORACION">
@@ -44,16 +54,6 @@
       <Column Name="F_START" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="F_END" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="PRUEBAS_TA_01_E_ID_USUARIOS" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="dbo.PRUEBAS_TA_05_BITACORA" Member="PRUEBAS_TA_05_BITACORA">
-    <Type Name="PRUEBAS_TA_05_BITACORA">
-      <Column Name="E_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="T_CONTROLLER" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="T_METHOD" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="E_USER_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="T_MESSAGE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="F_DATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.View_Tarea_User" Member="View_Tarea_User">
