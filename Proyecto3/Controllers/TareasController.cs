@@ -9,7 +9,7 @@ using System.Globalization;
 
 namespace Proyecto3.Controllers
 {
-     [BitacoraActionFilter]
+     
     public class TareasController : Controller
     {
 
@@ -17,7 +17,7 @@ namespace Proyecto3.Controllers
         private IFormatProvider provider;
         //
         // GET: /Tareas/
-
+        [BitacoraActionFilter]
         public ActionResult Index()
         {
             var tareas = (from tar in prueba.PRUEBAS_TA_04_CAT_TAREAS select tar).ToList();
@@ -79,7 +79,7 @@ namespace Proyecto3.Controllers
             prueba.PRUEBAS_TA_04_CAT_TAREAS.DeleteOnSubmit(user);
             prueba.SubmitChanges();
         }
-
+        [BitacoraActionFilter]
         [HttpPost]
         public int EditarTareaAjax(int id, String start, String end)
         {
@@ -112,7 +112,7 @@ namespace Proyecto3.Controllers
 
 
         }
-
+        [Authorize]
         public ActionResult Chart() {
             return View();
         }
@@ -177,7 +177,8 @@ namespace Proyecto3.Controllers
                 return Json(null, JsonRequestBehavior.AllowGet);
             }
          }
-        
+
+        [BitacoraActionFilter]
         [HttpPost]
         public JsonResult CrearTareaAjax(PRUEBAS_TA_04_CAT_TAREAS tarea)
         {

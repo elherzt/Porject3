@@ -194,12 +194,15 @@ namespace Proyecto3.Controllers
         
         }
 
-        public ActionResult Login() {
+        public ActionResult Login(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
         [HttpPost]
-        public ActionResult Login(String username, String password) {
+        public ActionResult Login(String username, String password, String returnUrl)
+        {
             var user = (from us in prueba.PRUEBAS_TA_01_CAT_USUARIOS where us.T_USUARIO == username select us).SingleOrDefault();
             if (user != null) {
                  var pass = getMd5Hash(password);
@@ -210,9 +213,8 @@ namespace Proyecto3.Controllers
                     Session["user"] = user.T_NOMBRE;
                 }
             }
-           
-            
-            return RedirectToAction("Index");
+                        
+            return RedirectToLocal(returnUrl);
 
         }
 
@@ -287,6 +289,17 @@ namespace Proyecto3.Controllers
 
     }
 
+    private ActionResult RedirectToLocal(string returnUrl)
+    {
+        if (Url.IsLocalUrl(returnUrl))
+        {
+            return Redirect(returnUrl);
+        }
+        else
+        {
+            return RedirectToAction("Index", "Home");
+        }
+    }
 
 
     }
