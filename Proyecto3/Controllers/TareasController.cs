@@ -17,6 +17,7 @@ namespace Proyecto3.Controllers
         private IFormatProvider provider;
         //
         // GET: /Tareas/
+        [Authorize(Roles = "Administrador")]
         [BitacoraActionFilter]
         public ActionResult Index()
         {

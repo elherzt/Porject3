@@ -178,6 +178,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>prueba.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Security\MyRoleProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

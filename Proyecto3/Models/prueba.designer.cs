@@ -45,6 +45,9 @@ namespace Proyecto3.Models
     partial void InsertPRUEBAS_TA_04_CAT_TAREAS(PRUEBAS_TA_04_CAT_TAREAS instance);
     partial void UpdatePRUEBAS_TA_04_CAT_TAREAS(PRUEBAS_TA_04_CAT_TAREAS instance);
     partial void DeletePRUEBAS_TA_04_CAT_TAREAS(PRUEBAS_TA_04_CAT_TAREAS instance);
+    partial void InsertRoles(Roles instance);
+    partial void UpdateRoles(Roles instance);
+    partial void DeleteRoles(Roles instance);
     #endregion
 		
 		public pruebaDataContext() : 
@@ -117,6 +120,22 @@ namespace Proyecto3.Models
 			}
 		}
 		
+		public System.Data.Linq.Table<Roles> Roles
+		{
+			get
+			{
+				return this.GetTable<Roles>();
+			}
+		}
+		
+		public System.Data.Linq.Table<UsersInRoles> UsersInRoles
+		{
+			get
+			{
+				return this.GetTable<UsersInRoles>();
+			}
+		}
+		
 		public System.Data.Linq.Table<View_Tarea_User> View_Tarea_User
 		{
 			get
@@ -156,6 +175,10 @@ namespace Proyecto3.Models
 		
 		private string _T_USUARIO;
 		
+		private System.Nullable<int> _RoleID;
+		
+		private EntityRef<Roles> _Roles;
+		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -184,10 +207,13 @@ namespace Proyecto3.Models
     partial void OnT_PASSWORDChanged();
     partial void OnT_USUARIOChanging(string value);
     partial void OnT_USUARIOChanged();
+    partial void OnRoleIDChanging(System.Nullable<int> value);
+    partial void OnRoleIDChanged();
     #endregion
 		
 		public PRUEBAS_TA_01_CAT_USUARIOS()
 		{
+			this._Roles = default(EntityRef<Roles>);
 			OnCreated();
 		}
 		
@@ -391,7 +417,7 @@ namespace Proyecto3.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_PASSWORD", DbType="VarChar(16) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_T_PASSWORD", DbType="VarChar(50)")]
 		public string T_PASSWORD
 		{
 			get
@@ -427,6 +453,64 @@ namespace Proyecto3.Models
 					this._T_USUARIO = value;
 					this.SendPropertyChanged("T_USUARIO");
 					this.OnT_USUARIOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", DbType="Int")]
+		public System.Nullable<int> RoleID
+		{
+			get
+			{
+				return this._RoleID;
+			}
+			set
+			{
+				if ((this._RoleID != value))
+				{
+					if (this._Roles.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRoleIDChanging(value);
+					this.SendPropertyChanging();
+					this._RoleID = value;
+					this.SendPropertyChanged("RoleID");
+					this.OnRoleIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Roles_PRUEBAS_TA_01_CAT_USUARIOS", Storage="_Roles", ThisKey="RoleID", OtherKey="RoleID", IsForeignKey=true)]
+		public Roles Roles
+		{
+			get
+			{
+				return this._Roles.Entity;
+			}
+			set
+			{
+				Roles previousValue = this._Roles.Entity;
+				if (((previousValue != value) 
+							|| (this._Roles.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Roles.Entity = null;
+						previousValue.PRUEBAS_TA_01_CAT_USUARIOS.Remove(this);
+					}
+					this._Roles.Entity = value;
+					if ((value != null))
+					{
+						value.PRUEBAS_TA_01_CAT_USUARIOS.Add(this);
+						this._RoleID = value.RoleID;
+					}
+					else
+					{
+						this._RoleID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Roles");
 				}
 			}
 		}
@@ -1176,6 +1260,165 @@ namespace Proyecto3.Models
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Roles")]
+	public partial class Roles : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _RoleID;
+		
+		private string _RoleName;
+		
+		private EntitySet<PRUEBAS_TA_01_CAT_USUARIOS> _PRUEBAS_TA_01_CAT_USUARIOS;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRoleIDChanging(int value);
+    partial void OnRoleIDChanged();
+    partial void OnRoleNameChanging(string value);
+    partial void OnRoleNameChanged();
+    #endregion
+		
+		public Roles()
+		{
+			this._PRUEBAS_TA_01_CAT_USUARIOS = new EntitySet<PRUEBAS_TA_01_CAT_USUARIOS>(new Action<PRUEBAS_TA_01_CAT_USUARIOS>(this.attach_PRUEBAS_TA_01_CAT_USUARIOS), new Action<PRUEBAS_TA_01_CAT_USUARIOS>(this.detach_PRUEBAS_TA_01_CAT_USUARIOS));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int RoleID
+		{
+			get
+			{
+				return this._RoleID;
+			}
+			set
+			{
+				if ((this._RoleID != value))
+				{
+					this.OnRoleIDChanging(value);
+					this.SendPropertyChanging();
+					this._RoleID = value;
+					this.SendPropertyChanged("RoleID");
+					this.OnRoleIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string RoleName
+		{
+			get
+			{
+				return this._RoleName;
+			}
+			set
+			{
+				if ((this._RoleName != value))
+				{
+					this.OnRoleNameChanging(value);
+					this.SendPropertyChanging();
+					this._RoleName = value;
+					this.SendPropertyChanged("RoleName");
+					this.OnRoleNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Roles_PRUEBAS_TA_01_CAT_USUARIOS", Storage="_PRUEBAS_TA_01_CAT_USUARIOS", ThisKey="RoleID", OtherKey="RoleID")]
+		public EntitySet<PRUEBAS_TA_01_CAT_USUARIOS> PRUEBAS_TA_01_CAT_USUARIOS
+		{
+			get
+			{
+				return this._PRUEBAS_TA_01_CAT_USUARIOS;
+			}
+			set
+			{
+				this._PRUEBAS_TA_01_CAT_USUARIOS.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_PRUEBAS_TA_01_CAT_USUARIOS(PRUEBAS_TA_01_CAT_USUARIOS entity)
+		{
+			this.SendPropertyChanging();
+			entity.Roles = this;
+		}
+		
+		private void detach_PRUEBAS_TA_01_CAT_USUARIOS(PRUEBAS_TA_01_CAT_USUARIOS entity)
+		{
+			this.SendPropertyChanging();
+			entity.Roles = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UsersInRoles")]
+	public partial class UsersInRoles
+	{
+		
+		private System.Nullable<int> _RoleID;
+		
+		private System.Nullable<int> _E_ID;
+		
+		public UsersInRoles()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", DbType="Int")]
+		public System.Nullable<int> RoleID
+		{
+			get
+			{
+				return this._RoleID;
+			}
+			set
+			{
+				if ((this._RoleID != value))
+				{
+					this._RoleID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_E_ID", DbType="Int")]
+		public System.Nullable<int> E_ID
+		{
+			get
+			{
+				return this._E_ID;
+			}
+			set
+			{
+				if ((this._E_ID != value))
+				{
+					this._E_ID = value;
+				}
 			}
 		}
 	}

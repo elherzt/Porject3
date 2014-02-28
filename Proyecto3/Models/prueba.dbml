@@ -12,8 +12,11 @@
       <Column Name="T_DIRECCION" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
       <Column Name="T_COLONIA" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
       <Column Name="REL_TA02_E_ID_CORPORACION" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="T_PASSWORD" Type="System.String" DbType="VarChar(16) NOT NULL" CanBeNull="false" />
+      <Column Name="T_PASSWORD" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="T_USUARIO" Type="System.String" DbType="VarChar(16) NOT NULL" CanBeNull="false" />
+      <Column Name="RoleID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="PRUEBAS_TA_01_CAT_USUARIOS_UsersInRoles" Member="UsersInRoles" ThisKey="E_ID" OtherKey="E_ID" Type="UsersInRoles" />
+      <Association Name="Roles_PRUEBAS_TA_01_CAT_USUARIOS" Member="Roles" ThisKey="RoleID" OtherKey="RoleID" Type="Roles" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.PRUEBAS_TA_05_BITACORA" Member="PRUEBAS_TA_05_BITACORA">
@@ -54,6 +57,22 @@
       <Column Name="F_START" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="F_END" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="PRUEBAS_TA_01_E_ID_USUARIOS" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Roles" Member="Roles">
+    <Type Name="Roles">
+      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Roles_PRUEBAS_TA_01_CAT_USUARIOS" Member="PRUEBAS_TA_01_CAT_USUARIOS" ThisKey="RoleID" OtherKey="RoleID" Type="PRUEBAS_TA_01_CAT_USUARIOS" />
+      <Association Name="Roles_UsersInRoles" Member="UsersInRoles" ThisKey="RoleID" OtherKey="RoleID" Type="UsersInRoles" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UsersInRoles" Member="UsersInRoles">
+    <Type Name="UsersInRoles">
+      <Column Name="RoleID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="E_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="PRUEBAS_TA_01_CAT_USUARIOS_UsersInRoles" Member="PRUEBAS_TA_01_CAT_USUARIOS" ThisKey="E_ID" OtherKey="E_ID" Type="PRUEBAS_TA_01_CAT_USUARIOS" IsForeignKey="true" />
+      <Association Name="Roles_UsersInRoles" Member="Roles" ThisKey="RoleID" OtherKey="RoleID" Type="Roles" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.View_Tarea_User" Member="View_Tarea_User">
